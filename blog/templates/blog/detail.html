@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{blog.title}}</title>
+</head>
+<body>
+    <section class="title">
+        {{blog.title}}
+    </section>
+    <section class="author">
+       {{blog.author}}
+    </section>
+    <section class="content">
+        {{blog.content}}
+    </section>
+    <section class="date">
+       {{blog.date}}
+    </section>
+
+    <section class="comments">
+        {% for comment in comments %}
+            {{comment.author}}
+            {{comment.content}}
+        {% endfor %}
+    </section>
+</body>
+</html>

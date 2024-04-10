@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if category == all %}
+        <title>All Blogs</title>
+    {% else %}
+        <title>{{category}}</title>
+    {% endif %}
+</head>
+<body>
+    {% if category == all %}
+        <h2>All Blogs</h2>
+    {% else %}
+        <h2>{{category}}</h2>
+    {% endif %}
+
+    {% for blog in blogs %}
+        <section class="blog">
+            <section class="title">
+                {{blog.title}}
+            </section>
+            <section class="author">
+               {{blog.author}}
+            </section>
+            <section class="date">
+               {{blog.date}}
+            </section>
+            <a href="{% url 'detail' blog.id %}">view</a>
+        </section>
+    {% endfor %}
+</body>
+</html>
