@@ -66,5 +66,6 @@ def profile(request):
 
 
 def user_logout(request):
+    next_page = request.GET.get('next', '/')
     logout(request)
-    return redirect('login')
+    return redirect(next_page)
