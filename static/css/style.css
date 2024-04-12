@@ -985,6 +985,37 @@ ol {
 	height: 63px;
 	margin-right: 26px;
 }
+/* ----------------
+  Login section
+---------------------*/
+.error{
+	color: #f44336;	
+	margin-bottom: 40px;
+}
+.login{
+	width: 787px;
+	margin: auto;
+}
+.login input{
+	margin-right: 0 !important;
+	margin-bottom:40px ;
+}
+.login-flex{
+	width: 787px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 40px;
+	gap: 40px;
+}
+.login-flex input{
+	width: 100% !important;
+	margin-bottom: 0;
+}
+.login .site-btn{
+	display: block !important;
+	width: 186px;
+	margin: auto;
+}
 
 /* ----------------
   Footer section
@@ -1550,6 +1581,14 @@ ol {
 	.newsletter-form {
 		padding-left: 0;
 	}
+	.login{
+		width: 100% ;
+	}
+	.login-flex{
+		width: 100%;
+		display: block;
+		margin-bottom:0;
+	}
 	.newsletter-form input {
 		width: 100%;
 		margin-right: 0;
@@ -1700,7 +1739,6 @@ ol {
 	.newsletter-form input {
 		width: 100%;
 		margin-right: 0;
-		margin-bottom: 40px;
 	}
 	.video-text:after {
 		left: 0;
