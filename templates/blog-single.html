@@ -47,7 +47,7 @@
 			<h2>Games</h2>
 			<div class="site-breadcrumb">
 				<a href="/">Home</a>  /
-				<a href="{% url 'blog_list' %}">Blog</a>  /
+				<a href="{% url 'blogs' %}">Blog</a>  /
 				<span>{{blog.title}}</span>
 			</div>
 		</div>
@@ -59,13 +59,13 @@
 	<section class="games-single-page">
 		<div class="container">
 			<div class="game-single-preview">
-				<img src="{{blog.cover}}" alt="">
+				<img src="{{blog.cover.url}}" alt="">
 			</div>
 			<div class="row">
 				<div class="col-xl-9 col-lg-8 col-md-7 game-single-content">
 					<div class="gs-meta">{{blog.date}}  /  in <a href="">{{blog.category}}</a></div>
 					<h2 class="gs-title">{{blog.title}}</h2>
-					{{blog.content}}
+					{{blog.text|safe}}
 					<div class="geme-social-share pt-5 d-flex">
 						<p>Share:</p>
 						<a href="#"><i class="fa fa-pinterest"></i></a>

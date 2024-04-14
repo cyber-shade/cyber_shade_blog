@@ -1,4 +1,5 @@
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 from users.models import User
 # Create your models here.
 
@@ -14,7 +15,8 @@ class Category(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    content = models.TextField()
+    cover = models.ImageField(upload_to='covers')
+    text = CKEditor5Field('Text', config_name='extends')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
