@@ -67,12 +67,12 @@
 					
 					{% for blog in blogs %}
 						<div class="big-blog-item">
-							<img src="{{blog.cover}}" alt="#" class="blog-thumbnail">
+							<img src="{{blog.cover.url}}" alt="#" class="blog-thumbnail">
 							<div class="blog-content text-box text-white">
 								<div class="top-meta"> {{blog.date}} /  in <a href="">{{blog.category}}</a></div>
 								<h3>{{blog.title}}</h3>
-								<p>{{blog.content|truncatechars:300}}</p>
-								<a href="{% url 'category' blog.id %}" class="read-more">Read More <img src="{% static 'img/icons/double-arrow.png' %}" alt="double-arrow"/></a>
+								<p>{{blog.text|striptags|truncatechars:300}}</p>
+								<a href="{% url 'single_blog' blog.id %}" class="read-more">Read More <img src="{% static 'img/icons/double-arrow.png' %}" alt="double-arrow"/></a>
 							</div>
 						</div>
 					{% endfor %}
