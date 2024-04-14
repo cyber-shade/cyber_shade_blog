@@ -42,12 +42,11 @@ $(window).on('load', function() {
 	/*------------------
 		Hero Slider
 	--------------------*/
+	
 	$('.hero-slider').owlCarousel({
 		loop: true,
 		nav: true,
 		dots: true,
-		navText: ['', '<img src="img/icons/solid-right-arrow.png">'],
-		mouseDrag: false,
 		animateOut: 'fadeOut',
 		animateIn: 'fadeIn',
 		items: 1,

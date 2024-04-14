@@ -20,10 +20,12 @@ from django.conf.urls.static import static
 from django.conf import settings
 from blog import urls as blog_urls
 from users import urls as users_urls
+from core import urls as core_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blogs/', include(blog_urls)),
     path('', include(users_urls)),
+    path('', include(core_urls)),
 
 ]
 urlpatterns += [
