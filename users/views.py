@@ -17,7 +17,7 @@ def user_login(request):
         request, username=request.POST['username'], password=request.POST['password'])
 
     if user is None:
-        error_message = "the combination of username and password doesn't match!"
+        error_message = "ترکیب نام کاربری و رمز عبور اشتباه هست!"
         return render(request, 'login.html', {'error_message': error_message})
 
     login(request, user)

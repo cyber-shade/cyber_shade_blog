@@ -15,4 +15,4 @@ class Slider(models.Model):
 
 # class Banner(models.Model):
 #     image = models.ImageField(upload_to='core/banners')
-#     name = models.CharField()
+#     name = models.CharField(unique=True)
