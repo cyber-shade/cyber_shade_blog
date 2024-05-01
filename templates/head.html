@@ -94,7 +94,7 @@
           </div>
         </form>
         {% if request.user.is_authenticated %}
-        <a href="#">{{user.username}}</a>
+        <a href="#">{{user.profile}}</a>
         {% else %}
         <button id="form-open" class="site-btn">ورود / ثبت نام</button>
         {% endif %}

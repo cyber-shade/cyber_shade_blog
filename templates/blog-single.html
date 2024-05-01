@@ -78,25 +78,14 @@
           >
         </section>
         <section class="comment-section">
-          <form class="form" id="comment-form">
-            <div class="form-flex">
-              <div class="input-holder">
-                <label for="comment-name">نام</label>
-                <input type="text" name="name" id="comment-name" />
-              </div>
-              <div class="input-holder">
-                <label for="comment-email">ایمیل</label>
-                <input type="email" name="comment-email" id="comment-email" />
-              </div>
-            </div>
-            <!-- <input type="text" name="reply"  value=""> -->
-            <div class="input-holder">
-              <label for="comment-text">نظر شما</label>
-              <textarea name="comment-text" id="comment-text"></textarea>
-            </div>
+          <form class="form" id="comment-form" method="post">
+            {% csrf_token %} {{ comment_form|safe }}
             <button class="site-btn">اشتراک گذاری</button>
           </form>
+          {% if blog.comments.all %}
           <section class="comments">
+            {% for comment in comments %}
+            {% if comment.is_not_reply %}
             <div class="comment">
               <div class="comment-avatar">
                 <img src="static/temp/avatar.jpg" alt="avatar" />
@@ -104,27 +93,41 @@
               <div class="comment-content">
                 <div class="comment-top">
                   <div class="comment-meta">
-                    <div class="comment-writer">محمد اکبری</div>
-                    |
-                    <div>ساعت 12:00 11 اردیبهشت 1403</div>
+                    <div class="comment-writer">{{comment.writer}}</div>
+                    <div>{{comment.date_time}}</div>
                   </div>
-                  <a href="#comment-form" class="reply-btn">
+                  <a href="#comment-form" class="reply-btn" reply-to="">
                     <img src="{% static 'img/reply.png' %}" alt="reply icon" />
                   </a>
                 </div>
-                <div class="comment-text">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-                  استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و
-                  مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                  تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                  کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و
-                  آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم
-                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
-                  طراحان خلاقی
-                </div>
+                <div class="comment-text">{{comment.content}}</div>
               </div>
             </div>
+            {% endif %}
+              {% for reply in comment.replies.all %}
+              <div class="comment reply">
+                <div class="comment-avatar">
+                  <img src="static/temp/avatar.jpg" alt="avatar" />
+                </div>
+                <div class="comment-content">
+                  <div class="comment-top">
+                    <div class="comment-meta">
+                      <div class="comment-writer">{{reply.writer}}</div>
+                      <div>{{reply.date_time}}</div>
+                    </div>
+                    <a href="#comment-form" class="reply-btn">
+                      <img src="{% static 'img/reply.png' %}" alt="reply icon" />
+                    </a>
+                  </div>
+                  <div class="comment-text">{{reply.content}}</div>
+                </div>
+              </div>
+              {% endfor %}
+            {% endfor %}
           </section>
+          {% else %}
+          <p>نظری ثبت نشده است!</p>
+          {% endif %}
         </section>
       </section>
       <section class="sidebar" id="sidebar">

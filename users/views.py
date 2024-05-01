@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .models import User
+from .models import CustomUser
 # Create your views here.
 
 
@@ -37,11 +37,11 @@ def user_register(request):
     email = request.POST['email']
     password = request.POST['password']
     password2 = request.POST['password2']
-    if User.objects.filter(username=username).exists():
+    if CustomUser.objects.filter(username=username).exists():
         error_message = "the username exists"
         return render(request, 'register.html', {'error_message': error_message})
 
-    if User.objects.filter(email=email).exists():
+    if CustomUser.objects.filter(email=email).exists():
         error_message = "the email exists"
         return render(request, 'register.html', {'error_message': error_message})
 
@@ -50,7 +50,7 @@ def user_register(request):
         return render(request, 'register.html', {'error_message': error_message})
 
     try:
-        user = User.objects.create_user(
+        user = CustomUser.objects.create_user(
             first_name=first_name, last_name=last_name, username=username, email=email, password=password)
         user.save()
         login(request, user)
