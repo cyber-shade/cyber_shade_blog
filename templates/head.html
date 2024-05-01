@@ -1,0 +1,120 @@
+{% load static %}
+<!-- Page Loader -->
+<div class="background" id="preloder">
+  <div class="loader"></div>
+</div>
+<!-- End of Page Loader -->
+<!-- Login / Register Section -->
+<div class="background" style="display: none">
+  <button id="form-close" class="close-button">
+    <div class="in">
+      <div class="close-button-block"></div>
+      <div class="close-button-block"></div>
+    </div>
+    <div class="out">
+      <div class="close-button-block"></div>
+      <div class="close-button-block"></div>
+    </div>
+  </button>
+  <div class="switcher" id="form-switcher">
+    <input type="checkbox" id="switcher" />
+    <label for="switcher"></label>
+  </div>
+  <section id="user-section" class="owl-carousel owl-theme">
+    <form class="form" data-dot="<button id='login-btn'></button>">
+      <div class="input-holder">
+        <label for="login-username">نام کاربری</label>
+        <input type="text" name="login-input" id="login-input" />
+      </div>
+      <div class="input-holder">
+        <label for="login-password">رمز عبور</label>
+        <input type="password" name="password" id="login-password" />
+      </div>
+      <button class="site-btn">ورود</button>
+    </form>
+    <form class="form" data-dot="<button id='register-btn'></button>">
+      <div class="form-flex">
+        <div class="input-holder">
+          <label for="firstname">نام</label>
+          <input type="text" name="firstname" id="firstname" />
+        </div>
+        <div class="input-holder">
+          <label for="lastname">نام خانوادگی</label>
+          <input type="text" name="lastname" id="lastname" />
+        </div>
+      </div>
+      <div class="input-holder">
+        <label for="username">نام کاربری</label>
+        <input type="text" name="username" id="username" />
+      </div>
+      <div class="input-holder">
+        <label for="email">ایمیل</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div class="input-holder">
+        <label for="password2">رمز عبور</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <div class="input-holder">
+        <label for="login-password">تکرار رمز عبور</label>
+        <input type="password" name="password2" id="password2" />
+      </div>
+      <button class="site-btn">ثبت نام</button>
+    </form>
+  </section>
+</div>
+<!-- End of Login / Register Section -->
+
+<!-- Header Section -->
+<header>
+  <div class="container">
+    <section class="header-top">
+      <nav class="social-media">
+        <a href=""><img src="{% static 'img/github.png' %}" alt="github" /></a>
+        <a href=""
+          ><img src=" {% static 'img/linkedin.png' %}" alt="github"
+        /></a>
+        <a href=""
+          ><img src=" {% static 'img/instagram.png' %}" alt="github"
+        /></a>
+        <a href=""><img src=" {% static 'img/stack.png' %}" alt="github" /></a>
+      </nav>
+      <nav class="header-forms">
+        <form class="search">
+          <div class="search__wrapper">
+            <input
+              type="text"
+              name=""
+              placeholder="جستجو ..."
+              class="search__field"
+            />
+            <button type="submit" class="search__icon">
+              <img src=" {% static 'img/search.png' %}" alt="search" />
+            </button>
+          </div>
+        </form>
+        {% if request.user.is_authenticated %}
+        <a href="#">{{user.profile}}</a>
+        {% else %}
+        <button id="form-open" class="site-btn">ورود / ثبت نام</button>
+        {% endif %}
+      </nav>
+    </section>
+    <section class="header-bottom">
+      <nav class="navbar">
+        <a href="#">صفحه اصلی</a>
+        <a href="#">بلاگ</a>
+        <a href="#">درباره من</a>
+        <a href="#">تماس با من</a>
+      </nav>
+      <section class="logo">
+        <a href="#" class="glitch">
+          <span aria-hidden="true">CYBER_SHADE</span>
+          CYBER_SHADE
+          <span aria-hidden="true">CYBER_SHADE</span>
+        </a>
+      </section>
+    </section>
+  </div>
+</header>
+<!-- End of Header Section -->
