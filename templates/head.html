@@ -1,4 +1,14 @@
 {% load static %}
+<!-- Message Handeling -->
+
+{% if request.GET.message %}
+<div class="message-box">
+    <div class="message {{request.GET.type}}">
+      {{request.GET.message}}
+    </div>
+</div>
+{% endif%}
+<!-- End of Message Handeling -->
 <!-- Page Loader -->
 <div class="background" id="preloder">
   <div class="loader"></div>
@@ -21,10 +31,11 @@
     <label for="switcher"></label>
   </div>
   <section id="user-section" class="owl-carousel owl-theme">
-    <form class="form" data-dot="<button id='login-btn'></button>">
+    <form method="post" action="{% url 'login' %}" class="form" data-dot="<button id='login-btn'></button>">
+      {% csrf_token %}
       <div class="input-holder">
         <label for="login-username">نام کاربری</label>
-        <input type="text" name="login-input" id="login-input" />
+        <input type="text" name="username" id="login-input" />
       </div>
       <div class="input-holder">
         <label for="login-password">رمز عبور</label>
@@ -32,7 +43,8 @@
       </div>
       <button class="site-btn">ورود</button>
     </form>
-    <form class="form" data-dot="<button id='register-btn'></button>">
+    <form method="post" action="{% url 'register' %}" class="form" data-dot="<button id='register-btn'></button>">
+      {% csrf_token %}
       <div class="form-flex">
         <div class="input-holder">
           <label for="firstname">نام</label>
@@ -94,9 +106,10 @@
           </div>
         </form>
         {% if request.user.is_authenticated %}
-        <a href="#">{{user.profile}}</a>
+        <a href="#">مشاهده پروفایل : {{user.username}}</a> | 
+        <a href="{% url 'logout' %}">خروج</a>
         {% else %}
-        <button id="form-open" class="site-btn">ورود / ثبت نام</button>
+        <button class="site-btn form-open">ورود / ثبت نام</button>
         {% endif %}
       </nav>
     </section>

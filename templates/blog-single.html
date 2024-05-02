@@ -77,11 +77,17 @@
             بخونید.</span
           >
         </section>
+        {% if request.user.is_authenticated %}
         <section class="comment-section">
           <form class="form" id="comment-form" method="post">
             {% csrf_token %} {{ comment_form|safe }}
             <button class="site-btn">اشتراک گذاری</button>
           </form>
+          {% else %}
+          
+            <p class="error">برای نظر دادن، لطفاً وارد شوید.</p>
+            <button class="form-open site-btn">ورود / ثبت نام</button>
+          {% endif %}
           {% if blog.comments.all %}
           <section class="comments">
             {% for comment in comments %}

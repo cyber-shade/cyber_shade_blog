@@ -116,7 +116,57 @@ input, textarea{
     width: 1170px;
     margin: auto;
 }
-
+.message-box{
+    position: absolute;
+    top: 100px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    animation: message-animation 5s ;
+}
+.message{
+    font-size: 24px;
+    height: 70px;
+    line-height: 70px;
+    width: 300px;
+    color: #FFF;
+    text-align: center;
+    font-family: dahgan-regular;
+    opacity: 0;
+    visibility: hidden;
+}
+.error{
+    background-color: red;
+}
+.success{
+    background-color: green;
+}
+@keyframes message-animation {
+    0%{
+        opacity: 0;
+        visibility: hidden;
+    }
+    10%{
+        opacity: 1;
+        visibility:visible;
+    }
+    90%{
+        opacity: 1;
+        visibility:visible;
+    }
+    100%{
+        opacity: 0;
+        visibility: hidden;
+    }
+}
 .section-heading {
     display: flex;
     flex-direction: column;
@@ -135,6 +185,12 @@ input, textarea{
     font-size: 20px;
     color: #BBB;
 }
+/* .form-error{
+    color: red;
+    font-family: dahgan-light;
+    font-size: 20px;
+    word-spacing: 5px;
+} */
 
 /*
 ||||||||||||

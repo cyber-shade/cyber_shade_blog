@@ -70,7 +70,7 @@ $(document).ready(function(){
 		}
 		
 	});
-	$('#form-open').on('click', function () {
+	$('.form-open').on('click', function () {
 		$('#user-section , .background').fadeIn()
 	});
 	$('#form-close').on('click', function () {
