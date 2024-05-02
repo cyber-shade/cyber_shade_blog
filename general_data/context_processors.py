@@ -1,6 +1,14 @@
-from blog.models import Category
+from blog.models import Category,Blog
 
 
 def blog_categories(request):
     categories = Category.objects.all()
-    return {'blog_categories': categories}
+    category_list = []
+    for category in categories:
+        count = Blog.objects.filter(category=category).count()
+        category_list.append({'info':category, 'count':count})
+    return {'blog_categories': category_list}
+
+def special_blogs(request):
+    special_blogs = Blog.objects.filter(special=True)
+    return {'special_blogs': special_blogs}

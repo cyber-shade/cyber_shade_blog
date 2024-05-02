@@ -45,7 +45,6 @@ $(document).ready(function(){
 				items:3,
 			}
 		},
-		loop: true,
 		rtl: true,
 		autoplay:true,	
 		autoplayTimeout: 10000,

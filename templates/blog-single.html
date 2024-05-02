@@ -45,31 +45,34 @@
           <h2>بلاگ های مرتبط</h2>
           <span>اگه از این مطلب خوشت اومد، اینا هم ممکنه برات جذاب باشه</span>
         </section>
+        {% if related_blogs %}
         <section class="blogs owl-carousel owl-theme blogs-more">
-          <section class="blog">
+          {% for blog in related_blogs%}
+          <div class="blog">
             <div class="blog-img">
-              <img
-                src="static/temp/WB2079-525X280H-kopyası.webp"
-                alt="batman"
-              />
+              <img src="{{blog.cover.url}}" alt="batman" />
             </div>
             <div class="blog-content">
               <div class="blog-content-top">
-                <div class="blog-title">این عنوان این پست هست</div>
+                <div class="blog-title">{{blog.title}}</div>
                 <div class="blog-meta">
-                  در<a href="#" class="">فیلم</a>11 اردیبهشت 1402<a href="#"
-                    >علی قره داغی</a
-                  >
+                  در
+                  <a href="#"> {{blog.category}} </a>
+                  {{blog.date}}
+                  <a href="#"> {{blog.author}} </a>
                 </div>
                 <div class="blog-text">
-                  کمی متن کوتاه درمورد این بلاگ کمی متن کوتاه درمورد این بلاگ
-                  کمی متن کوتاه درمورد این بلاگ
+                  {{blog.text|striptags|truncatechars:50}}
                 </div>
               </div>
-              <a href="#" class="site-btn">ادامه مطلب</a>
+              <a href="{% url 'single_blog' blog.url %}" class="site-btn">
+                ادامه مطلب
+              </a>
             </div>
-          </section>
+          </div>
+          {% endfor %}
         </section>
+        {% endif %}
         <section class="section-heading">
           <h2>نظرات</h2>
           <span
@@ -137,14 +140,16 @@
         </section>
       </section>
       <section class="sidebar" id="sidebar">
+        {% if blog_categories%}
         <h4 class="sidebar-heading">دسته بندی ها</h4>
         <ul class="sidebar-list">
           {% for category in blog_categories %}
           <li>
-            <a href="#">{{category.name}} <span>10</span></a>
+            <a href="{[categpry.info.name]}">{{category.info.name}} <span>{{category.count}}</span></a>
           </li>
           {% endfor %}
         </ul>
+        {% endif %}
         <h4 class="sidebar-heading">پر بازدید ترین بلاگ ها</h4>
         <section class="blogs blogs-row">
           <a href="#">

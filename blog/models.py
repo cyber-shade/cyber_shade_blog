@@ -21,8 +21,11 @@ class Blog(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     views = models.IntegerField(default=0)
+    special = models.BooleanField(default=False)
     date = models.DateField(auto_now_add=True)
-
+    
+    class Meta:
+        ordering = ['-date']
     def __str__(self):
         return f'{self.title[:40]} | {self.author}'
 

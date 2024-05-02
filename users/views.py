@@ -21,7 +21,7 @@ def user_login(request):
         return redirect(url)
 
     login(request, user)
-    url = url_message(request,'با موفقست وارد شدید ', 'success')
+    url = url_message(request,'با موفقیت وارد شدید ', 'success')
     return redirect(url)
 
 

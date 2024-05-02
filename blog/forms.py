@@ -12,7 +12,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
 
-        fields = ('writer', 'email', 'content', 'reply_to')
+        fields = ('writer', 'email', 'content','blog', 'reply_to')
         labels = {
             'writer': ('نام'),
             'email': ('ایمیل'),

@@ -131,6 +131,8 @@ input, textarea{
     gap: 50px;
     align-items: center;
     animation: message-animation 5s ;
+    opacity: 0;
+    visibility: hidden;
 }
 .message{
     font-size: 24px;
@@ -140,8 +142,7 @@ input, textarea{
     color: #FFF;
     text-align: center;
     font-family: dahgan-regular;
-    opacity: 0;
-    visibility: hidden;
+    
 }
 .error{
     background-color: red;
