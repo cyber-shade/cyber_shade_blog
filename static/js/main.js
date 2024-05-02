@@ -45,7 +45,6 @@ $(document).ready(function(){
 				items:3,
 			}
 		},
-		loop: true,
 		rtl: true,
 		autoplay:true,	
 		autoplayTimeout: 10000,
@@ -70,7 +69,7 @@ $(document).ready(function(){
 		}
 		
 	});
-	$('#form-open').on('click', function () {
+	$('.form-open').on('click', function () {
 		$('#user-section , .background').fadeIn()
 	});
 	$('#form-close').on('click', function () {

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from .utils import url_message
 from .models import CustomUser
 # Create your views here.
 
@@ -11,26 +11,28 @@ def user_login(request):
         return redirect('profile')
 
     if not request.method == 'POST':
-        return render(request, 'login.html')
+        return redirect('/')
 
     user = authenticate(
         request, username=request.POST['username'], password=request.POST['password'])
 
     if user is None:
-        error_message = "ترکیب نام کاربری و رمز عبور اشتباه هست!"
-        return render(request, 'login.html', {'error_message': error_message})
+        url = url_message(request,'نام کاربری یا رمز عبور اشتباه است', 'error')
+        return redirect(url)
 
     login(request, user)
-    return redirect('profile')
+    url = url_message(request,'با موفقیت وارد شدید ', 'success')
+    return redirect(url)
 
 
 def user_register(request):
 
     if request.user.is_authenticated:
-        return redirect('profile')
+        url = url_message(request,'قبلاً وارد شدید', 'error')
+        return redirect(url)
 
     if not request.method == 'POST':
-        return render(request, 'register.html')
+         return redirect('/')
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     username = request.POST['username']
@@ -38,27 +40,25 @@ def user_register(request):
     password = request.POST['password']
     password2 = request.POST['password2']
     if CustomUser.objects.filter(username=username).exists():
-        error_message = "the username exists"
-        return render(request, 'register.html', {'error_message': error_message})
+        url = url_message(request,'نام کاربری وجود دارد', 'error')
+        return redirect(url)
 
     if CustomUser.objects.filter(email=email).exists():
-        error_message = "the email exists"
-        return render(request, 'register.html', {'error_message': error_message})
-
+        url = url_message(request,'ایمیل وجود دارد', 'error')
+        return redirect(url)
     if password != password2:
-        error_message = "the password doesn't match!"
-        return render(request, 'register.html', {'error_message': error_message})
-
+        url = url_message(request,'رمز های عبور با هم مطابقت ندارد', 'error')
+        return redirect(url)
     try:
         user = CustomUser.objects.create_user(
             first_name=first_name, last_name=last_name, username=username, email=email, password=password)
         user.save()
         login(request, user)
-        return redirect('profile')
+        url = url_message(request,'حساب شما با موفقیت ایجاد شد ', 'success')
+        return redirect(url)
     except:
-        error_message = 'somehting went wrong! try again.'
-        return render(request, 'register.html', {'error_message': error_message})
-
+        url = url_message(request,'مشکلی ایجاد شد، دوباره سعی کنید', 'error')
+        return redirect(url)
 
 @login_required
 def profile(request):
@@ -66,6 +66,6 @@ def profile(request):
 
 
 def user_logout(request):
-    next_page = request.GET.get('next', '/')
     logout(request)
-    return redirect(next_page)
+    url = url_message(request,'شما خارج شدید', 'succuess')
+    return redirect(url)

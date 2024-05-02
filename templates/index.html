@@ -65,33 +65,38 @@
         {% endfor %}
       </section>
       {% endif %}
+      {% if special_blogs %}
       <section class="section-heading">
         <h2>بلاگ های منتخب</h2>
         <span>جند تا از بلاگ های مورد علاقه خودم</span>
       </section>
       <section class="blogs owl-carousel owl-theme blogs-more">
-        <section href="#" class="blog">
+        {% for blog in special_blogs %}
+        <div class="blog">
           <div class="blog-img">
-            <img src="static/temp/WB2079-525X280H-kopyası.webp" alt="batman" />
+            <img src="{{blog.cover.url}}" alt="batman" />
           </div>
           <div class="blog-content">
             <div class="blog-content-top">
-              <div class="blog-title">این عنوان این پست هست</div>
+              <div class="blog-title">{{blog.title}}</div>
               <div class="blog-meta">
                 در
-                <a href="#" class=""> فیلم </a>
-                11 اردیبهشت 1402
-                <a href="#"> علی قره داغی </a>
+                <a href="#"> {{blog.category}} </a>
+                {{blog.date}}
+                <a href="#"> {{blog.author}} </a>
               </div>
               <div class="blog-text">
-                کمی متن کوتاه درمورد این بلاگ کمی متن کوتاه درمورد این بلاگ کمی
-                متن کوتاه درمورد این بلاگ
+                {{blog.text|striptags|truncatechars:300}}
               </div>
             </div>
-            <a href="#" class="site-btn">ادامه مطلب</a>
+            <a href="{% url 'single_blog' blog.url %}" class="site-btn">
+              ادامه مطلب
+            </a>
           </div>
-        </section>
+        </div>
+        {% endfor %}
       </section>
+      {% endif %}
     </main>
     {% include "foot.html" %}
     <!--====== Javascripts & Jquery ======-->
