@@ -9,8 +9,9 @@ $(window).on('load', function() {
 	$("#preloder").delay(400).fadeOut("slow");
 
 });
-//  main slider
-$(document).ready(function(){
+
+$(document).ready(function () {
+	//  main slider
 	$("#slider").owlCarousel({
 		slideSpeed : 300,
 		paginationSpeed: 300,
@@ -75,6 +76,7 @@ $(document).ready(function(){
 	$('#form-close').on('click', function () {
 		$('#user-section , .background').fadeOut()
 	});
+
 	// Back to top button
 	
 	$('.bck').backToTop({

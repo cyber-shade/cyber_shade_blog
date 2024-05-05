@@ -17,22 +17,23 @@ def user_login(request):
         request, username=request.POST['username'], password=request.POST['password'])
 
     if user is None:
-        url = url_message(request,'نام کاربری یا رمز عبور اشتباه است', 'error')
+        url = url_message(
+            request, 'نام کاربری یا رمز عبور اشتباه است', 'error')
         return redirect(url)
 
     login(request, user)
-    url = url_message(request,'با موفقیت وارد شدید ', 'success')
+    url = url_message(request, 'با موفقیت وارد شدید ', 'success')
     return redirect(url)
 
 
 def user_register(request):
 
     if request.user.is_authenticated:
-        url = url_message(request,'قبلاً وارد شدید', 'error')
+        url = url_message(request, 'قبلاً وارد شدید', 'error')
         return redirect(url)
 
     if not request.method == 'POST':
-         return redirect('/')
+        return redirect('/')
     first_name = request.POST['first_name']
     last_name = request.POST['last_name']
     username = request.POST['username']
@@ -40,25 +41,26 @@ def user_register(request):
     password = request.POST['password']
     password2 = request.POST['password2']
     if CustomUser.objects.filter(username=username).exists():
-        url = url_message(request,'نام کاربری وجود دارد', 'error')
+        url = url_message(request, 'نام کاربری وجود دارد', 'error')
         return redirect(url)
 
     if CustomUser.objects.filter(email=email).exists():
-        url = url_message(request,'ایمیل وجود دارد', 'error')
+        url = url_message(request, 'ایمیل وجود دارد', 'error')
         return redirect(url)
     if password != password2:
-        url = url_message(request,'رمز های عبور با هم مطابقت ندارد', 'error')
+        url = url_message(request, 'رمز های عبور با هم مطابقت ندارد', 'error')
         return redirect(url)
     try:
         user = CustomUser.objects.create_user(
             first_name=first_name, last_name=last_name, username=username, email=email, password=password)
         user.save()
         login(request, user)
-        url = url_message(request,'حساب شما با موفقیت ایجاد شد ', 'success')
+        url = url_message(request, 'حساب شما با موفقیت ایجاد شد ', 'success')
         return redirect(url)
     except:
-        url = url_message(request,'مشکلی ایجاد شد، دوباره سعی کنید', 'error')
+        url = url_message(request, 'مشکلی ایجاد شد، دوباره سعی کنید', 'error')
         return redirect(url)
+
 
 @login_required
 def profile(request):
@@ -67,5 +69,5 @@ def profile(request):
 
 def user_logout(request):
     logout(request)
-    url = url_message(request,'شما خارج شدید', 'succuess')
+    url = url_message(request, 'شما خارج شدید', 'success')
     return redirect(url)

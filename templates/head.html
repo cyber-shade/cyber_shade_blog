@@ -1,13 +1,13 @@
 {% load static %}
 <!-- Message Handeling -->
 
-{% if request.GET.message %}
+{% if messages %}
 <div class="message-box">
-    <div class="message {{request.GET.type}}">
-      {{request.GET.message}}
-    </div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="message {{ message.tags }}"{% endif %} >{{ message }}</div>
+    {% endfor %}
 </div>
-{% endif%}
+{% endif %}
 <!-- End of Message Handeling -->
 <!-- Page Loader -->
 <div class="background" id="preloder">
@@ -80,18 +80,21 @@
 <!-- Header Section -->
 <header>
   <div class="container">
-    <section class="header-top">
-      <nav class="social-media">
-        <a href=""><img src="{% static 'img/github.png' %}" alt="github" /></a>
-        <a href=""
-          ><img src=" {% static 'img/linkedin.png' %}" alt="github"
-        /></a>
-        <a href=""
-          ><img src=" {% static 'img/instagram.png' %}" alt="github"
-        /></a>
-        <a href=""><img src=" {% static 'img/stack.png' %}" alt="github" /></a>
-      </nav>
-      <nav class="header-forms">
+    <section class="logo">
+      <a href="#" class="glitch">
+        <span aria-hidden="true">CYBER_SHADE</span>
+        CYBER_SHADE
+        <span aria-hidden="true">CYBER_SHADE</span>
+      </a>
+    </section>
+    <nav class="navbar">
+      <section class="navbar-links">
+        <a href="#">صفحه اصلی</a>
+        <a href="#">بلاگ</a>
+        <a href="#">درباره من</a>
+        <a href="#">تماس با من</a>
+      </section>
+      <section class="header-forms">
         <form class="search">
           <div class="search__wrapper">
             <input
@@ -106,28 +109,33 @@
           </div>
         </form>
         {% if request.user.is_authenticated %}
-        <a href="#">مشاهده پروفایل : {{user.username}}</a> | 
-        <a href="{% url 'logout' %}">خروج</a>
+        <button id="profile-btn">
+          <img src={% if user.avatar %} "{{user.avatar}}" {% else %} "{% static 'img/default-avatar.png'%}"  {% endif %}alt="avatar">
+        </button>
+        <section id="profile-menu">
+            <a href="#">
+              پروفایل {{user.username}}
+            </a>
+            <a href="{% url 'logout' %}">خروج</a>
+        </section>
         {% else %}
         <button class="site-btn form-open">ورود / ثبت نام</button>
         {% endif %}
-      </nav>
-    </section>
-    <section class="header-bottom">
-      <nav class="navbar">
-        <a href="#">صفحه اصلی</a>
-        <a href="#">بلاگ</a>
-        <a href="#">درباره من</a>
-        <a href="#">تماس با من</a>
-      </nav>
-      <section class="logo">
-        <a href="#" class="glitch">
-          <span aria-hidden="true">CYBER_SHADE</span>
-          CYBER_SHADE
-          <span aria-hidden="true">CYBER_SHADE</span>
-        </a>
       </section>
-    </section>
+    </nav>
   </div>
 </header>
 <!-- End of Header Section -->
+
+
+
+<!-- <nav class="social-media">
+  <a href=""><img src="{% static 'img/github.png' %}" alt="github" /></a>
+  <a href=""
+    ><img src=" {% static 'img/linkedin.png' %}" alt="github"
+  /></a>
+  <a href=""
+    ><img src=" {% static 'img/instagram.png' %}" alt="github"
+  /></a>
+  <a href=""><img src=" {% static 'img/stack.png' %}" alt="github" /></a>
+</nav> -->

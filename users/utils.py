@@ -1,6 +1,11 @@
-from urllib.parse import urlencode
-def url_message(request,message,type):
+from django.contrib import messages
+
+
+def url_message(request, message, type):
     previous_page = request.META.get('HTTP_REFERER')
-    redirect_message = urlencode({'message': message, 'type' : type})
-    url = '{}?{}'.format(previous_page, redirect_message)
-    return url
+    if type == 'success':
+        message_tag = messages.SUCCESS
+    else:
+        message_tag = messages.ERROR
+    messages.add_message(request, message_tag, message)
+    return previous_page
