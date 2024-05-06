@@ -125,6 +125,7 @@ input, textarea{
     bottom: 0;
     margin: auto;
     height: 100%;
+    width: 300px;
     z-index: 10000;
     display: flex;
     flex-direction: column;
@@ -323,6 +324,7 @@ input, textarea{
 	border: 1px solid #AAA;
 	transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 1.5);
 	overflow: hidden;
+    z-index: 1000;
 }
 .bck.bck-on {visibility: visible;}
 
@@ -624,7 +626,6 @@ input, textarea{
 */
 header{
     background-color: #111;
-    height: 80px;
 }
 header .container, .navbar{
     display: flex;
@@ -648,7 +649,7 @@ header .container, .navbar{
     text-transform: uppercase;
     position: relative;
     text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
-        0.025em 0.04em 0 #fffc00;
+        0.025em 0.04em 0 #d1d1cd;
     animation: glitch 1.25s infinite;
 }
 
@@ -775,7 +776,6 @@ header .container, .navbar{
     display: flex;
     justify-content: flex-end;
     gap: 20px;
-    height: 80px;
     align-items: center;
     position: relative;
 }
@@ -818,6 +818,45 @@ header .container, .navbar{
     opacity: 1;
     visibility: visible;
 }
+/* humberger menu button */
+#humberger-btn {
+    display: none;
+  }
+  #humberger-btn .line {
+    fill: none;
+    stroke: #FFF;
+    stroke-width: 3;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+      stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  #humberger-btn .line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 3;
+  }
+  #humberger-btn .line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 3;
+  }
+  #humberger-btn .line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 3;
+  }
+  .opened .line1 {
+    stroke-dasharray: 90 207 !important;
+    stroke-dashoffset: -134 !important;
+    stroke-width: 3 !important;
+  }
+  .opened .line2 {
+    stroke-dasharray: 1 60 !important; 
+    stroke-dashoffset: -30 !important;
+    stroke-width: 3 !important;
+  }
+  .opened .line3 {
+    stroke-dasharray: 90 207 !important;
+    stroke-dashoffset: -134 !important;
+    stroke-width: 3 !important;
+  }
+  
 /*
 ||||||||||||
     search bar

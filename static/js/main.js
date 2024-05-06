@@ -11,6 +11,17 @@ $(window).on('load', function() {
 });
 
 $(document).ready(function () {
+	// humberger button
+	$('#humberger-btn').click(function(){
+		if ($(this).hasClass("opened")){
+			$(this).removeClass("opened");
+			$('#navbar').fadeOut(1000);
+		}
+		else{
+			$(this).addClass("opened");
+			$('#navbar').fadeIn(1000);
+		}
+	});
 	//  main slider
 	$("#slider").owlCarousel({
 		slideSpeed : 300,
