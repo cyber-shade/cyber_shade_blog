@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+    <title>صفحه اصلی</title>
+  </head>
+  <body>
+    {% include "head.html" %}
+    <!-- End of Header Section -->
+    <section
+      class="slide blog-single-banner"
+      style="background-image: url({{page.cover.url}});"
+    >
+      <div class="container">
+        <h4 class="slide-title">{{page.name}}</h4>
+        <span href="#" class="slide-more-btn">
+          <span></span><span></span><span></span>
+        </span>
+      </div>
+    </section>
+    <main class="container blog-single-content page-single" >
+        {{page.text|safe}}
+    </main>
+    {% include "foot.html" %}
+    <!--====== Javascripts & Jquery ======-->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.back-to-top.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

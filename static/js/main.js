@@ -82,10 +82,10 @@ $(document).ready(function () {
 		
 	});
 	$('.form-open').on('click', function () {
-		$('#user-section , .background').fadeIn()
+		$('#user-section , .background').fadeIn();
 	});
 	$('#form-close').on('click', function () {
-		$('#user-section , .background').fadeOut()
+		$('#user-section , .background').fadeOut();
 	});
 
 	// Back to top button

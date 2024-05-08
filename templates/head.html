@@ -89,17 +89,21 @@
     </section>
     <nav class="navbar" id="navbar">
       <section class="navbar-links">
-        <a href="#">صفحه اصلی</a>
-        <a href="#">بلاگ</a>
-        <a href="#">درباره من</a>
-        <a href="#">تماس با من</a>
+        <a href="{% url 'index' %}">صفحه اصلی</a>
+        <a href="{% url 'blogs' %}">بلاگ</a>
+        {% if pages %}
+          {% for page in pages %}
+          <a href="{% url 'page' page.url %}">{{page.name}}</a>
+          {% endfor %}
+        {% endif %}
       </section>
       <section class="header-forms">
-        <form class="search">
+        <form class="search" role="search" method="post" action="{% url 'search' %}">
+          {% csrf_token %}
           <div class="search__wrapper">
             <input
               type="text"
-              name=""
+              name="search"
               placeholder="جستجو ..."
               class="search__field"
             />
@@ -113,7 +117,7 @@
           <img src={% if user.avatar %} "{{user.avatar}}" {% else %} "{% static 'img/default-avatar.png'%}"  {% endif %}alt="avatar">
         </button>
         <section id="profile-menu">
-            <a href="#">
+            <a href="{% url 'profile' %}">
               پروفایل {{user.username}}
             </a>
             <a href="{% url 'logout' %}">خروج</a>

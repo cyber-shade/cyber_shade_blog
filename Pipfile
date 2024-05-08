@@ -10,6 +10,7 @@ pillow = "*"
 django-ckeditor-5 = "*"
 django-widget-tweaks = "*"
 django-jalali-date = "*"
+django-hitcount = "*"
 
 [dev-packages]
 

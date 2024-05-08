@@ -69,6 +69,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'general_data.context_processors.blog_categories',
                 'general_data.context_processors.special_blogs',
+                'general_data.context_processors.pages',
+                'general_data.context_processors.latest_blogs'
 
             ],
         },

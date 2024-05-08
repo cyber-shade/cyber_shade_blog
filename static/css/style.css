@@ -239,7 +239,9 @@ input, textarea{
 .site-btn:active {
     top: 2px;
 }
-
+.scroll-hiddn{
+    overflow-y: hidden !important; 
+}
 .background{
     position: fixed;
 	width: 100%;
@@ -247,6 +249,7 @@ input, textarea{
 	top: 0;
 	left: 0;
 	z-index: 999999;
+    overflow-y: auto;
 	background: rgba(0,0,0,0.7)  
 }
 /*
@@ -1180,7 +1183,7 @@ header .container, .navbar{
 }
 
 .blog-img img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
 }
 
@@ -1346,6 +1349,9 @@ header .container, .navbar{
     max-width: 100%;
     height: auto;
     display: block;
+}
+.page-single{
+    margin: 70px auto;
 }
 /*
 ||||||||||||

@@ -1,5 +1,5 @@
 from blog.models import Category,Blog
-
+from core.models import Page
 
 def blog_categories(request):
     categories = Category.objects.all()
@@ -12,3 +12,10 @@ def blog_categories(request):
 def special_blogs(request):
     special_blogs = Blog.objects.filter(special=True)
     return {'special_blogs': special_blogs}
+
+def pages(request):
+    pages = Page.objects.all
+    return {'pages': pages}
+
+def latest_blogs(request):
+    return {'latest_blogs': Blog.objects.all()[:3]}

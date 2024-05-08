@@ -77,4 +77,13 @@
     .blogs-row .blog {
         padding: 0 20px;
     }
+    .blog-single-container{
+        grid: auto /auto;
+    }
+    .blog-single{
+        padding-left: 0;
+    }
+    .sidebar{
+        padding-right: 0;
+    }
 }

@@ -34,8 +34,8 @@ def user_register(request):
 
     if not request.method == 'POST':
         return redirect('/')
-    first_name = request.POST['first_name']
-    last_name = request.POST['last_name']
+    first_name = request.POST['firstname']
+    last_name = request.POST['lastname']
     username = request.POST['username']
     email = request.POST['email']
     password = request.POST['password']

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+    <title>صفحه اصلی</title>
+  </head>
+  <body>
+    {% include "head.html" %}
+    <!-- End of Header Section -->
+    <main class="container">
+        {% if blog_search %}
+        <section class="section-heading">
+          <h2>نتایج جستجو</h2>
+            <span>نتیجه جستجو برای {{blog_search}}</span>
+        </section>
+        {% else %}
+        <section class="section-heading">
+          <h2>جدید ترین بلاگ ها</h2>
+          <span>اینجا جدیدترین بلاگ هایی که نوشتم رو میبینید</span>
+          </section>
+        {% endif %}
+        <section class="blogs">
+          {% for blog in blogs %}
+          <div class="blog">
+            <div class="blog-img">
+              <img src="{{blog.cover.url}}" alt="batman" />
+            </div>
+            <div class="blog-content">
+              <div class="blog-content-top">
+                <div class="blog-title">{{blog.title}}</div>
+                <div class="blog-meta">
+                  در
+                  <a href="#"> {{blog.category}} </a>
+                  {{blog.date}}
+                  <a href="#"> {{blog.author}} </a>
+                </div>
+                <div class="blog-text">
+                  {{blog.text|striptags|truncatechars:300}}
+                </div>
+              </div>
+              <a href="{% url 'single_blog' blog.url %}" class="site-btn">
+                ادامه مطلب
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+    {% include "foot.html" %}
+    <!--====== Javascripts & Jquery ======-->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.back-to-top.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

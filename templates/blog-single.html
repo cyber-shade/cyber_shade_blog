@@ -73,7 +73,7 @@
           {% endfor %}
         </section>
         {% endif %}
-        <section class="section-heading">
+        <!-- <section class="section-heading">
           <h2>نظرات</h2>
           <span
             >نظر خودتون رو درباره این بلاگ بنویسید و یا نظرات بقیه رو
@@ -137,7 +137,7 @@
           {% else %}
           <p>نظری ثبت نشده است!</p>
           {% endif %}
-        </section>
+        </section> -->
       </section>
       <section class="sidebar" id="sidebar">
         {% if blog_categories%}
@@ -150,40 +150,31 @@
           {% endfor %}
         </ul>
         {% endif %}
-        <h4 class="sidebar-heading">پر بازدید ترین بلاگ ها</h4>
+        {% if latest_blogs%}
+        <h4 class="sidebar-heading">جدید ترین بلاگ ها</h4>
         <section class="blogs blogs-row">
-          <a href="#">
-            <section class="blog">
-              <section class="blog-img">
+          {% for latest_blog in latest_blogs %}
+          {% if latest_blog.url != blog.url %}
+          <a href="{% url 'single_blog' latest_blog.url %}">
+            <div class="blog">
+              <div class="blog-img">
                 <img
-                  src="static/temp/WB2079-525X280H-kopyası.webp"
-                  alt="batman"
+                  src="{{latest_blog.cover.url}}"
+                  alt="{{latest_blog.title}}"
                 />
-              </section>
-              <section class="blog-content">
-                <section class="blog-content-top">
+              </div>
+              <div class="blog-content">
+                <div class="blog-content-top">
                   <div class="blog-title">
-                    چگونه سوپرجاینت گیمز برای همیشه صنعت بازی را تغییر داد؟
+                    {{latest_blog.title}}
                   </div>
-                </section>
-              </section>
-            </section>
+                </div>
+              </div>
+            </div>
           </a>
-          <a href="#">
-            <section class="blog">
-              <section class="blog-img">
-                <img
-                  src="static/temp/WB2079-525X280H-kopyası.webp"
-                  alt="batman"
-                />
-              </section>
-              <section class="blog-content">
-                <section class="blog-content-top">
-                  <div class="blog-title">این عنوان این پست هست</div>
-                </section>
-              </section>
-            </section>
-          </a>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
         </section>
       </section>
     </main>
