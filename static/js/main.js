@@ -96,7 +96,10 @@ $(document).ready(function () {
 
 	// sticky side bar in blogs and blog single
 	$('#sidebar').stickySidebar({
-		topSpacing: 60,
-		bottomSpacing: 60
+		topSpacing: 50,
+		bottomSpacing: 100,
+	});
+	$('.reply-btn').click(function(){
+		$('#reply-to-input select').val($(this).attr('reply-to'));
 	});
 });

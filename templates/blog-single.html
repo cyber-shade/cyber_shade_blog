@@ -41,11 +41,11 @@
     <main class="container blog-single-container">
       <section class="blog-single">
         <section class="blog-single-content">{{blog.text|safe}}</section>
+        {% if related_blogs %}
         <section class="section-heading">
           <h2>بلاگ های مرتبط</h2>
           <span>اگه از این مطلب خوشت اومد، اینا هم ممکنه برات جذاب باشه</span>
         </section>
-        {% if related_blogs %}
         <section class="blogs owl-carousel owl-theme blogs-more">
           {% for blog in related_blogs%}
           <div class="blog">
@@ -73,7 +73,7 @@
           {% endfor %}
         </section>
         {% endif %}
-        <!-- <section class="section-heading">
+        <section class="section-heading">
           <h2>نظرات</h2>
           <span
             >نظر خودتون رو درباره این بلاگ بنویسید و یا نظرات بقیه رو
@@ -82,13 +82,16 @@
         </section>
         {% if request.user.is_authenticated %}
         <section class="comment-section">
-          <form class="form" id="comment-form" method="post">
+          <form class="form" id="comment-form" method="post" action="{% url 'comment' %}">
+            <div class="input-holder">
+
+            </div>
             {% csrf_token %} {{ comment_form|safe }}
             <button class="site-btn">اشتراک گذاری</button>
           </form>
           {% else %}
           
-            <p class="error">برای نظر دادن، لطفاً وارد شوید.</p>
+            <p class="form-error">برای نظر دادن، لطفاً وارد شوید.</p>
             <button class="form-open site-btn">ورود / ثبت نام</button>
           {% endif %}
           {% if blog.comments.all %}
@@ -105,11 +108,11 @@
                     <div class="comment-writer">{{comment.writer}}</div>
                     <div>{{comment.date_time}}</div>
                   </div>
-                  <a href="#comment-form" class="reply-btn" reply-to="">
+                  <a href="#comment-form" class="reply-btn" reply-to="{{comment.pk}}">
                     <img src="{% static 'img/reply.png' %}" alt="reply icon" />
                   </a>
                 </div>
-                <div class="comment-text">{{comment.content}}</div>
+                <div class="comment-text">{{comment.content|safe}}</div>
               </div>
             </div>
             {% endif %}
@@ -124,7 +127,7 @@
                       <div class="comment-writer">{{reply.writer}}</div>
                       <div>{{reply.date_time}}</div>
                     </div>
-                    <a href="#comment-form" class="reply-btn">
+                    <a href="#comment-form" class="reply-btn" reply-to="{{comment.pk}}">
                       <img src="{% static 'img/reply.png' %}" alt="reply icon" />
                     </a>
                   </div>
@@ -137,7 +140,7 @@
           {% else %}
           <p>نظری ثبت نشده است!</p>
           {% endif %}
-        </section> -->
+        </section>
       </section>
       <section class="sidebar" id="sidebar">
         {% if blog_categories%}

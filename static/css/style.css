@@ -424,6 +424,13 @@ input, textarea{
     Login / Register Section & forms
 ||||||||||||
 */
+.form-error{
+    font-size: 25px;
+    font-family: dahgan-bold;
+    color: #de0a26;
+    text-align: center;
+    margin: 30px 0;
+}
 .form{
     height: 100%;
     margin: auto;
@@ -464,7 +471,7 @@ input, textarea{
     font-size: 18px;
 }
 .input-holder textarea{
-    min-height:100px;
+    min-height:200px;
     resize: vertical;
 }
 .input-holder input:hover,.input-holder textarea:hover{
@@ -473,6 +480,9 @@ input, textarea{
 }
 .input-holder input:focus,.input-holder textarea:focus{
    border-color: #FFF !important;
+}
+.disabeld-input{
+    display: none;
 }
 #user-section .owl-dots button{
     color: #FFF ;
@@ -1338,7 +1348,7 @@ header .container, .navbar{
 }
 .blog-single-content{
     color: #FFF;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 40px;
     font-family: cyber, dahgan-light;
 }

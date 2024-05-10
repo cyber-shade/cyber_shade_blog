@@ -2,7 +2,6 @@ from .models import Comment
 from django_ckeditor_5.widgets import CKEditor5Widget
 from django import forms
 
-
 class CommentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -11,11 +10,9 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-
-        fields = ('writer', 'email', 'content','blog', 'reply_to')
+        fields = ('writer', 'content','blog', 'reply_to')
         labels = {
             'writer': ('نام'),
-            'email': ('ایمیل'),
             'content': ('نظر'),
         }
         widgets = {
@@ -27,11 +24,9 @@ class CommentForm(forms.ModelForm):
             'writer': {
                 'max_length': ("نام وارد شده طولانی است"),
             },
-            'email': {
-                'max_length': ("ایمیل طولانی است"),
-            },
-            'name': {
-                'max_length': ("متن بسیار طولانی است"),
+            'content': {
+                'max_length': ("متن نظر طولانی است."),
             },
 
         }
+            

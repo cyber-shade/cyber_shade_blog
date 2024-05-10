@@ -31,10 +31,9 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    writer = models.CharField()
-    email = models.EmailField(max_length=254)
+    writer = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     date_time = models.DateTimeField(auto_now_add=True)
-    content = CKEditor5Field('Text', config_name='default')
+    content = CKEditor5Field('Text', config_name='default',max_length=500)
     reply_to = models.ForeignKey(
         'self', on_delete=models.CASCADE, null=True, blank=True, related_name="replies")
     blog = models.ForeignKey(
