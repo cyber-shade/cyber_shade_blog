@@ -32,6 +32,14 @@
             <img src="{% static 'img/category.png' %}" alt="category" />
             {{blog.category}}
           </a>
+          <span>
+            <img src="{% static 'img/comments.png' %}" alt="comments" />
+            {{blog.comments.count}}
+          </span>
+          <span>
+            <img src="{% static 'img/star.png' %}" alt="star rating" />
+            {{rating}}
+          </span>
         </section>
         <span href="#" class="slide-more-btn">
           <span></span><span></span><span></span>
@@ -82,6 +90,19 @@
         </section>
         {% if request.user.is_authenticated %}
         <section class="comment-section">
+          <form class="rating" action="{% url 'rate' blog.url %}" method="post">
+            {% csrf_token %}
+            <section class="section-heading">
+              <span>امتیاز شما به این مطلب</span
+              >
+            </section>
+            <input name="rating" id="e5" type="radio" value="5"></a><label for="e5">☆</label>
+            <input name="rating" id="e4" type="radio" value="4"></a><label for="e4">☆</label>
+            <input name="rating" id="e3" type="radio" value="3"></a><label for="e3">☆</label>
+            <input name="rating" id="e2" type="radio" value="2"></a><label for="e2">☆</label>
+            <input name="rating" id="e1" type="radio" value="1"></a><label for="e1">☆</label>
+            <button type="submit" class="site-btn">ثبت امتیاز</button>
+          </form>
           <form class="form" id="comment-form" method="post" action="{% url 'comment' %}">
             <div class="input-holder">
 
@@ -97,7 +118,6 @@
           {% if blog.comments.all %}
           <section class="comments">
             {% for comment in comments %}
-            {% if comment.is_not_reply %}
             <div class="comment">
               <div class="comment-avatar">
                 <img src="static/temp/avatar.jpg" alt="avatar" />
@@ -115,7 +135,6 @@
                 <div class="comment-text">{{comment.content|safe}}</div>
               </div>
             </div>
-            {% endif %}
               {% for reply in comment.replies.all %}
               <div class="comment reply">
                 <div class="comment-avatar">

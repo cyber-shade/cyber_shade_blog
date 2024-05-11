@@ -151,6 +151,9 @@ input, textarea{
 .success{
     background-color: green;
 }
+.warning{
+    background-color: yellow;
+}
 @keyframes message-animation {
     0%{
         opacity: 0;
@@ -632,6 +635,41 @@ input, textarea{
   .close-button:hover .out .close-button-block:after {
     transform: translateX(20px) translateY(20px) rotate(-45deg);
   }
+
+  /*Rating Form  */
+  em {
+    display: block;
+    margin: .5em auto 2em;
+    color: #bbb;
+}
+.rating {
+    width: 226px;
+    margin: 0 auto 1em;
+    font-size: 45px;
+    overflow:hidden;
+}
+.rating input {
+float: right;
+opacity: 0;
+position: absolute;
+}
+.rating a,
+.rating label {
+    float:right;
+    color: #aaa;
+    text-decoration: none;
+    -webkit-transition: color .4s;
+    -moz-transition: color .4s;
+    -o-transition: color .4s;
+    transition: color .4s;
+}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating label:focus{
+    color: orange;
+    cursor: pointer;
+}
 /*
 ||||||||||||
     header section

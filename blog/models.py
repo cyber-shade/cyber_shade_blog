@@ -1,6 +1,7 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from users.models import CustomUser
+from django.db.models import Avg
 # Create your models here.
 
 
@@ -24,11 +25,22 @@ class Blog(models.Model):
     special = models.BooleanField(default=False)
     date = models.DateField(auto_now_add=True)
     
+    def average_rating(self) -> float:
+        return Rating.objects.filter(blog=self).aggregate(Avg("rating"))["rating__avg"] or 0
+    
     class Meta:
         ordering = ['-date']
+
     def __str__(self):
         return f'{self.title[:40]} | {self.author}'
+    
+class Rating(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"{self.blog.title}: {self.rating}"
 
 class Comment(models.Model):
     writer = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
