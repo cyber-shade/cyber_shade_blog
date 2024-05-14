@@ -643,10 +643,10 @@ input, textarea{
     color: #bbb;
 }
 .rating {
-    width: 226px;
     margin: 0 auto 1em;
     font-size: 45px;
     overflow:hidden;
+    text-align: center;
 }
 .rating input {
 float: right;
@@ -654,8 +654,8 @@ opacity: 0;
 position: absolute;
 }
 .rating a,
-.rating label {
-    float:right;
+.rating label,
+.rating span {
     color: #aaa;
     text-decoration: none;
     -webkit-transition: color .4s;
@@ -666,7 +666,8 @@ position: absolute;
 .rating label:hover ~ label,
 .rating input:focus ~ label,
 .rating label:hover,
-.rating label:focus{
+.rating label:focus,
+.rating .active{
     color: orange;
     cursor: pointer;
 }

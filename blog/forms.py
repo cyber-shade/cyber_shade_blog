@@ -10,9 +10,8 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('writer', 'content','blog', 'reply_to')
+        fields = ('content',  'reply_to')
         labels = {
-            'writer': ('نام'),
             'content': ('نظر'),
         }
         widgets = {
@@ -21,9 +20,6 @@ class CommentForm(forms.ModelForm):
             )
         }
         error_messages = {
-            'writer': {
-                'max_length': ("نام وارد شده طولانی است"),
-            },
             'content': {
                 'max_length': ("متن نظر طولانی است."),
             },

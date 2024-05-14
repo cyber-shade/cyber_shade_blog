@@ -52,17 +52,21 @@ class Comment(models.Model):
         Blog, related_name='comments', on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['-date_time']
+        ordering = ['date_time']   
 
     @property
     def replies(self):
         return Comment.objects.filter(reply_to=self).reverse()
 
     @property
-    def is_not_reply(self):
-        if self.reply_to is None:
+    def is_reply(self):
+        if self.reply_to:
             return True
         return False
-
+    
+    @property
+    def writer_info(self):
+        return CustomUser.objects.get(username=self.writer)
+    
     def __str__(self):
         return f'{self.writer} on {self.blog} in {self.date_time}'

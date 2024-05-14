@@ -9,6 +9,7 @@ def blog_categories(request):
         category_list.append({'info':category, 'count':count})
     return {'blog_categories': category_list}
 
+
 def special_blogs(request):
     special_blogs = Blog.objects.filter(special=True)
     return {'special_blogs': special_blogs}

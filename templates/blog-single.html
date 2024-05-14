@@ -90,12 +90,20 @@
         </section>
         {% if request.user.is_authenticated %}
         <section class="comment-section">
+          <section class="section-heading">
+            <span>امتیاز شما به این مطلب</span>
+          </section>
+          {% if user_rate %}
+            <div class="rating" id="user-rate" rate="{{user_rate}}">
+              <span>☆</span>
+              <span>☆</span>
+              <span>☆</span>
+              <span>☆</span>
+              <span>☆</span>
+            </div>
+          {% else %}
           <form class="rating" action="{% url 'rate' blog.url %}" method="post">
             {% csrf_token %}
-            <section class="section-heading">
-              <span>امتیاز شما به این مطلب</span
-              >
-            </section>
             <input name="rating" id="e5" type="radio" value="5"></a><label for="e5">☆</label>
             <input name="rating" id="e4" type="radio" value="4"></a><label for="e4">☆</label>
             <input name="rating" id="e3" type="radio" value="3"></a><label for="e3">☆</label>
@@ -103,10 +111,8 @@
             <input name="rating" id="e1" type="radio" value="1"></a><label for="e1">☆</label>
             <button type="submit" class="site-btn">ثبت امتیاز</button>
           </form>
-          <form class="form" id="comment-form" method="post" action="{% url 'comment' %}">
-            <div class="input-holder">
-
-            </div>
+          {% endif %}
+          <form class="form" id="comment-form" method="post" action="{% url 'comment' blog.url %}">
             {% csrf_token %} {{ comment_form|safe }}
             <button class="site-btn">اشتراک گذاری</button>
           </form>
@@ -118,9 +124,18 @@
           {% if blog.comments.all %}
           <section class="comments">
             {% for comment in comments %}
+              {% if not comment.is_reply %}
             <div class="comment">
               <div class="comment-avatar">
-                <img src="static/temp/avatar.jpg" alt="avatar" />
+                <img 
+          {% if comment.writer_info.avatar_img %}
+            src="{{comment.writer_info.avatar_img.url}}"
+          {% elif comment.writer_info.avatar_url %}
+            src="{{comment.writer_info.avatar_url}}"
+          {% else %}
+            src="{% static 'img/default-avatar.png'%}"
+          {% endif %}
+          alt="{{comment.writer_info.usernam}} avatar" />
               </div>
               <div class="comment-content">
                 <div class="comment-top">
@@ -135,25 +150,36 @@
                 <div class="comment-text">{{comment.content|safe}}</div>
               </div>
             </div>
-              {% for reply in comment.replies.all %}
-              <div class="comment reply">
-                <div class="comment-avatar">
-                  <img src="static/temp/avatar.jpg" alt="avatar" />
-                </div>
-                <div class="comment-content">
-                  <div class="comment-top">
-                    <div class="comment-meta">
-                      <div class="comment-writer">{{reply.writer}}</div>
-                      <div>{{reply.date_time}}</div>
+                {% if comment.replies %}
+                  {% for reply in comment.replies.all %}
+                  <div class="comment reply">
+                    <div class="comment-avatar">
+                      <img 
+                {% if reply.writer_info.avatar_img %}
+                  src="{{reply.writer_info.avatar_img.url}}"
+                {% elif reply.writer_info.avatar_url %}
+                  src="{{reply.writer_info.avatar_url}}"
+                {% else %}
+                  src="{% static 'img/default-avatar.png'%}"
+                {% endif %}
+                alt="{{reply.writer_info.usernam}} avatar" />
                     </div>
-                    <a href="#comment-form" class="reply-btn" reply-to="{{comment.pk}}">
-                      <img src="{% static 'img/reply.png' %}" alt="reply icon" />
-                    </a>
+                    <div class="comment-content">
+                      <div class="comment-top">
+                        <div class="comment-meta">
+                          <div class="comment-writer">{{reply.writer}}</div>
+                          <div>{{reply.date_time}}</div>
+                        </div>
+                        <a href="#comment-form" class="reply-btn" reply-to="{{comment.pk}}">
+                          <img src="{% static 'img/reply.png' %}" alt="reply icon" />
+                        </a>
+                      </div>
+                      <div class="comment-text">{{reply.content|safe}}</div>
+                    </div>
                   </div>
-                  <div class="comment-text">{{reply.content}}</div>
-                </div>
-              </div>
-              {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              {% endif %}
             {% endfor %}
           </section>
           {% else %}
@@ -162,7 +188,7 @@
         </section>
       </section>
       <section class="sidebar" id="sidebar">
-        {% if blog_categories%}
+        {% if blog_categories %}
         <h4 class="sidebar-heading">دسته بندی ها</h4>
         <ul class="sidebar-list">
           {% for category in blog_categories %}
@@ -207,5 +233,11 @@
     <script src="{% static 'js/jquery.back-to-top.js' %}"></script>
     <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      var rate =5 - (Math.floor($('#user-rate').attr('rate')));
+        for(i=5;i>rate;i--){
+          $('#user-rate span:nth-child('+ i +')').addClass('active')
+        }
+    </script>
   </body>
 </html>

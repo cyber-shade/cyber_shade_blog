@@ -4,6 +4,7 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    avatar = models.ImageField(upload_to="avatars")
+    avatar_img = models.ImageField(upload_to="avatars",null=True,blank=True)
+    avatar_url = models.URLField(null=True,blank=True)
     bio = models.TextField(max_length=500)
     birth_day = models.DateField(null=True, blank=True)

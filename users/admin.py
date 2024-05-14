@@ -9,7 +9,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ["email", "username", "avatar", "bio", "birth_day"]
+    list_display = ["email", "username", "avatar_img","avatar_url", "bio", "birth_day"]
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

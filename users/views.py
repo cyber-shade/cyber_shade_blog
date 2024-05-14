@@ -52,7 +52,8 @@ def user_register(request):
         return redirect(url)
     try:
         user = CustomUser.objects.create_user(
-            first_name=first_name, last_name=last_name, username=username, email=email, password=password)
+            first_name=first_name, last_name=last_name, username=username, email=email, password=password, 
+            avatar_url=f'https://api.multiavatar.com/{username}.png?apikey=5UrShkWasbjdlJ')
         user.save()
         login(request, user)
         url = url_message(request, 'حساب شما با موفقیت ایجاد شد ', 'success')
