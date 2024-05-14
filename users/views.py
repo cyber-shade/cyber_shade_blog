@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .utils import url_message
 from .models import CustomUser
+from .forms import ProfileForm
 # Create your views here.
 
 
@@ -52,7 +53,7 @@ def user_register(request):
         return redirect(url)
     try:
         user = CustomUser.objects.create_user(
-            first_name=first_name, last_name=last_name, username=username, email=email, password=password, 
+            first_name=first_name, last_name=last_name, username=username, email=email, password=password,
             avatar_url=f'https://api.multiavatar.com/{username}.png?apikey=5UrShkWasbjdlJ')
         user.save()
         login(request, user)
@@ -65,7 +66,20 @@ def user_register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    user = request.user
+    initial_dict = {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "username": user.username,
+        "email": user.email,
+        "avatar_img": user.avatar_img,
+        "avatar_url": user.avatar_url,
+        "bio": user.bio,
+        "birth_day": user.birth_day,
+    }
+    profile_form = ProfileForm(initial=initial_dict)
+    rendered_form = profile_form.render("profile_snippet.html")
+    return render(request, 'profile.html', {'profile_form': rendered_form})
 
 
 def user_logout(request):

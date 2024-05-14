@@ -13,13 +13,42 @@
   <body>
     {% include "head.html" %}
 
-    اینجا مثلا پروفایل هست
-    
+    <main class="container">
+      <form action="" class="form-grid">
+        {% csrf_token %} 
+          <div class="form-preview">
+            <div class="form-avatar">
+              <img 
+              {% if user.avatar_img %}
+                src="{{user.avatar_img.url}}"
+              {% elif user.avatar_url %}
+                src="{{user.avatar_url}}"
+              {% else %}
+                src="{% static 'img/default-avatar.png'%}"
+              {% endif %}
+              alt="{{user.usernam}} avatar" />
+            </div>
+            <div>
+              {{user.username}}
+            </div>
+            <div>
+              {{user.email}}
+            </div>
+            <a href="{% url 'logout' %}" class="site-btn">خروج</a>
+          </div>
+          <div class="form">
+            {{ profile_form|safe }} 
+            <button class="site-btn">
+              ثبت تغییرات
+            </button>
+          </div>
+      </form>
+    </main>
     {% include "foot.html" %}
     <!--====== Javascripts & Jquery ======-->
-    <script src="static/js/jquery-3.2.1.min.js"></script>
-    <script src="static/js/owl.carousel.min.js"></script>
-    <script src="static/js/jquery.back-to-top.js"></script>
-    <script src="static/js/main.js"></script>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.back-to-top.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

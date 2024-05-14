@@ -449,6 +449,32 @@ input, textarea{
     gap: 20px;
     width: 100%;
 }
+.form-grid{
+    display: grid;
+    grid-template: auto / calc(20% - 25px) calc(80% - 25px);
+    gap: 50px;
+}
+.form-grid .form{
+    width: 100%;
+}
+.form-preview{
+    font-size: 22px;
+    color: #FFF;
+    text-align: center;
+    font-family: cyber;
+    flex-direction: column;
+    display: flex;
+    gap: 20px;
+}
+.form-avatar img{
+    height: 150px;
+    width: 150px;
+}
+.form-preview .site-btn{
+    margin: 0 auto;
+    width: 100px;
+    margin-top: 30px;
+}
 .input-holder{
     width: 100%;
 }
