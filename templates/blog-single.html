@@ -81,17 +81,11 @@
           {% endfor %}
         </section>
         {% endif %}
-        <section class="section-heading">
-          <h2>نظرات</h2>
-          <span
-            >نظر خودتون رو درباره این بلاگ بنویسید و یا نظرات بقیه رو
-            بخونید.</span
-          >
-        </section>
         {% if request.user.is_authenticated %}
         <section class="comment-section">
           <section class="section-heading">
-            <span>امتیاز شما به این مطلب</span>
+            <h2>امتیاز</h2>
+            <span>به این مطلب امتیاز دهید.</span>
           </section>
           {% if user_rate %}
             <div class="rating" id="user-rate" rate="{{user_rate}}">
@@ -112,6 +106,13 @@
             <button type="submit" class="site-btn">ثبت امتیاز</button>
           </form>
           {% endif %}
+          <section class="section-heading">
+            <h2>نظرات</h2>
+            <span
+              >نظر خودتون رو درباره این بلاگ بنویسید و یا نظرات بقیه رو
+              بخونید.</span
+            >
+          </section>
           <form class="form" id="comment-form" method="post" action="{% url 'comment' blog.url %}">
             {% csrf_token %} {{ comment_form|safe }}
             <button class="site-btn">اشتراک گذاری</button>
@@ -238,6 +239,7 @@
         for(i=5;i>rate;i--){
           $('#user-rate span:nth-child('+ i +')').addClass('active')
         }
+           
     </script>
   </body>
 </html>

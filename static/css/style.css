@@ -486,7 +486,7 @@ input, textarea{
     font-size: 22px;
     padding: 5px 10px; 
 }
-.input-holder input,.input-holder textarea {
+.input-holder input,.input-holder textarea, .input-holder select {
     background: transparent;
     border:2px solid transparent;
     border-top-color:#AAA ;

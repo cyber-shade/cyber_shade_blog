@@ -22,6 +22,9 @@ $(document).ready(function () {
 			$('#navbar').fadeIn(1000);
 		}
 	});
+	$('.reply-btn').click(function(){
+		$('#reply-to-input select').val($(this).attr('reply-to'));
+	});
 	//  main slider
 	$("#slider").owlCarousel({
 		slideSpeed : 300,
@@ -99,8 +102,6 @@ $(document).ready(function () {
 		topSpacing: 50,
 		bottomSpacing: 100,
 	});
-	$('.reply-btn').click(function(){
-		$('#reply-to-input select').val($(this).attr('reply-to'));
-	});
+	
 
 });
