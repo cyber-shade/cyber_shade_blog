@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
     avatar_img = models.ImageField(upload_to="avatars",null=True,blank=True)
     avatar_url = models.URLField(null=True,blank=True)
     bio = models.TextField(max_length=500)

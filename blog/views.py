@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Blog, Rating
 from .forms import CommentForm
-from users.models import CustomUser
+from users.models import User
 from users.utils import url_message
 # Create your views here.
 
@@ -26,7 +26,7 @@ def single_blog(request, url):
     related_blogs = Blog.objects.filter(
         category=blog.category).exclude(pk=blog.pk)
     comments = blog.comments.all
-    author_details = CustomUser.objects.get(username=blog.author)
+    author_details = User.objects.get(username=blog.author)
     rating = None
     if request.user.is_authenticated:
         try:

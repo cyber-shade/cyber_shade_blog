@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .utils import url_message
-from .models import CustomUser
+from .models import User
 from .forms import ProfileForm
 # Create your views here.
 
@@ -41,18 +41,18 @@ def user_register(request):
     email = request.POST['email']
     password = request.POST['password']
     password2 = request.POST['password2']
-    if CustomUser.objects.filter(username=username).exists():
+    if User.objects.filter(username=username).exists():
         url = url_message(request, 'نام کاربری وجود دارد', 'error')
         return redirect(url)
 
-    if CustomUser.objects.filter(email=email).exists():
+    if User.objects.filter(email=email).exists():
         url = url_message(request, 'ایمیل وجود دارد', 'error')
         return redirect(url)
     if password != password2:
         url = url_message(request, 'رمز های عبور با هم مطابقت ندارد', 'error')
         return redirect(url)
     try:
-        user = CustomUser.objects.create_user(
+        user = User.objects.create_user(
             first_name=first_name, last_name=last_name, username=username, email=email, password=password,
             avatar_url=f'https://api.multiavatar.com/{username}.png?apikey=5UrShkWasbjdlJ')
         user.save()

@@ -1,7 +1,14 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
-from users.models import CustomUser
-# Create your models here.
+from users.models import User
+
+class Category(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    parent = models.ForeignKey(
+        'self', blank=True, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Slider(models.Model):
     title = models.CharField(max_length=100)
@@ -18,7 +25,7 @@ class Page(models.Model):
     url = models.SlugField(allow_unicode=True, unique=True)
     cover = models.ImageField(upload_to='covers')
     text = CKEditor5Field('Text', config_name='extends')
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    creator = models.ForeignKey('users.User', on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
