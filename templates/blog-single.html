@@ -38,7 +38,7 @@
           </span>
           <span>
             <img src="{% static 'img/star.png' %}" alt="star rating" />
-            {{rating}}
+            {% comment %} {{rating}} {% endcomment %}
           </span>
         </section>
         <span href="#" class="slide-more-btn">
@@ -81,7 +81,7 @@
           {% endfor %}
         </section>
         {% endif %}
-        {% if request.user.is_authenticated %}
+        {% comment %} {% if request.user.is_authenticated %}
         <section class="comment-section">
           <section class="section-heading">
             <h2>امتیاز</h2>
@@ -185,8 +185,8 @@
           </section>
           {% else %}
           <p>نظری ثبت نشده است!</p>
-          {% endif %}
-        </section>
+          {% endif %} {% endcomment %}
+        {% comment %} </section> {% endcomment %}
       </section>
       <section class="sidebar" id="sidebar">
         {% if blog_categories %}
@@ -235,10 +235,10 @@
     <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script>
-      var rate =5 - (Math.floor($('#user-rate').attr('rate')));
+      {% comment %} var rate =5 - (Math.floor($('#user-rate').attr('rate')));
         for(i=5;i>rate;i--){
           $('#user-rate span:nth-child('+ i +')').addClass('active')
-        }
+        } {% endcomment %}
            
     </script>
   </body>
