@@ -22,10 +22,10 @@ def blogs(request, category_id: int = None):
 def single_blog(request, url):
 
     blog = get_object_or_404(Blog, url=url)
-    reting = blog.average_rating()
+    # reting = blog.average_rating()
     related_blogs = Blog.objects.filter(
         category=blog.category).exclude(pk=blog.pk)
-    comments = blog.comments.all
+    # comments = blog.comments.all
     author_details = User.objects.get(username=blog.author)
     # rating = None
     # if request.user.is_authenticated:
@@ -40,7 +40,7 @@ def single_blog(request, url):
                   {'blog': blog, 
                 #    'comments': comments,'rating': reting,  
                     'author': author_details, 'related_blogs': related_blogs,
-                      'comment_form': comment_form(request),
+                    #   'comment_form': comment_form(request),
                     #   'user_rate':rating
                       })
 

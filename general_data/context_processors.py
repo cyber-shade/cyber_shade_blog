@@ -1,5 +1,5 @@
-from blog.models import Category,Blog
-from core.models import Page
+from blog.models import Blog
+from core.models import Page, Category
 
 def blog_categories(request):
     categories = Category.objects.all()
