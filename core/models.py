@@ -1,6 +1,8 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from users.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -10,6 +12,14 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    creator = models.ForeignKey("users.User")
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+    date= models.DateTimeField(auto_now_add=True)
+    
 class Slider(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=255)

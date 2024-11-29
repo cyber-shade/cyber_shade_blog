@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Slider, Page, Category
+from .models import Slider, Page, Category, Tag
 # Register your models here.
 admin.site.register(Slider)
 class PageAdmin(admin.ModelAdmin):
@@ -8,3 +8,4 @@ class PageAdmin(admin.ModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 admin.site.register(Category)
+admin.site.register(Tag)

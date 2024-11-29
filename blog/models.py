@@ -1,6 +1,8 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
-
+from django.contrib.contenttypes.fields import GenericRelation
+from hub.models import Point
+from django.db.models import Avg
 class Blog(models.Model):
     title = models.CharField(max_length=255, unique=True)
     url = models.SlugField(allow_unicode=True, unique=True)
@@ -11,7 +13,8 @@ class Blog(models.Model):
     views = models.IntegerField(default=0)
     special = models.BooleanField(default=False)
     date = models.DateField(auto_now_add=True)
-    
+    tags = GenericRelation("core.Tag")
+
     class Meta:
         ordering = ['-date']
 
