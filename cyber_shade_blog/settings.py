@@ -30,6 +30,16 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+GLOBAL_APPS = [
+    'django_ckeditor_5',
+]
+
+LOCAL_APPS = [
+    'core',
+    'blog',
+    'users',
+    'hub',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,12 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_ckeditor_5',
-    'core',
-    'blog',
-    'users',
+] + GLOBAL_APPS + LOCAL_APPS
 
-]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

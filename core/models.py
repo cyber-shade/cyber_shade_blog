@@ -14,7 +14,7 @@ class Category(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    creator = models.ForeignKey("users.User")
+    creator = models.ForeignKey("users.User", on_delete=models.DO_NOTHING)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
