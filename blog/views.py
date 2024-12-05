@@ -4,7 +4,7 @@ from .models import Blog
 # from .forms import CommentForm
 from users.models import User
 from users.utils import url_message
-# Create your views here.
+from django.db.models import Q
 
 
 def categories(request):
@@ -19,14 +19,18 @@ def blogs(request, category_id: int = None):
     return render(request, 'blogs.html', {'blogs': blogs})
 
 
-def single_blog(request, url):
+def single_blog(request, slug):
 
-    blog = get_object_or_404(Blog, url=url)
+    blog = get_object_or_404(Blog, slug=slug)
     # reting = blog.average_rating()
+    tags = blog.tags.all()
     related_blogs = Blog.objects.filter(
-        category=blog.category).exclude(pk=blog.pk)
-    # comments = blog.comments.all
+        tags__in=tags
+    ).exclude(pk=blog.pk)
+    comments = blog.comments.all
     author_details = User.objects.get(username=blog.author)
+    resources = [{'website' : resource.split('/')[0], 'url' : resource } for resource in blog.resources]
+    print(resources)
     # rating = None
     # if request.user.is_authenticated:
     #     try:
@@ -38,8 +42,12 @@ def single_blog(request, url):
 
     return render(request, 'blog-single.html',
                   {'blog': blog, 
-                #    'comments': comments,'rating': reting,  
-                    'author': author_details, 'related_blogs': related_blogs,
+                   'comments': comments,
+                # 'rating': reting,  
+                    'author': author_details,
+                    'related_blogs': related_blogs,
+                    'resources' : resources,
+                    'tags' : tags,
                     #   'comment_form': comment_form(request),
                     #   'user_rate':rating
                       })
@@ -55,7 +63,7 @@ def single_blog(request, url):
 #     # check if the request is post 
 #     new_comment = None
 #     if request.method =='POST':  
-#         blog = Blog.objects.get(url=blog_url)
+#         blog = Blog.objects.get(slug=blog_url)
 #         comment_form = CommentForm(data=request.POST)
 #         if comment_form.is_valid():
 #             new_comment = comment_form.save(commit=False)
@@ -70,10 +78,10 @@ def single_blog(request, url):
 #     return redirect(url)
 
 # @login_required
-# def rate(request, url):
+# def rate(request, slug):
 #     # check if user has not rate before
 #     if request.method == 'POST':
-#         blog = get_object_or_404(Blog, url=url)
+#         blog = get_object_or_404(Blog, slug=slug)
 #         user_rate = Rating.objects.filter(user=request.user, blog = blog)
 #         if user_rate:
 #             url = url_message(request, 'شما قبلاً امتیاز دادید.', 'warning')

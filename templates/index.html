@@ -57,7 +57,7 @@
                 {{blog.text|striptags|truncatechars:300}}
               </div>
             </div>
-            <a href="{% url 'single_blog' blog.url %}" class="site-btn">
+            <a href="{% url 'single_blog' blog.slug %}" class="site-btn">
               ادامه مطلب
             </a>
           </div>
@@ -89,7 +89,7 @@
                 {{blog.text|striptags|truncatechars:300}}
               </div>
             </div>
-            <a href="{% url 'single_blog' blog.url %}" class="site-btn">
+            <a href="{% url 'single_blog' blog.slug %}" class="site-btn">
               ادامه مطلب
             </a>
           </div>

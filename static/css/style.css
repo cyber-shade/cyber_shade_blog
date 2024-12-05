@@ -1299,7 +1299,30 @@ header .container, .navbar{
     line-height: 30px;
     color: #FFF;
 }
-
+.blog-footer{
+    border-style: dotted;
+    
+    border-top: 1px;
+    border-bottom: 1px;
+    margin: 25px 0;
+    padding: 25px 0;
+    display: grid;
+    grid: auto/ 50% 50%;
+}
+.blog-footer-head{
+    font-family: cyber,dahgan-regular;
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+}
+.blog-footer-head img{
+    width: 30px;
+    padding-left: 15px;
+}
+.blog-footer a{
+    font-family: cyber,dahgan-light;
+    font-size: 16px;
+}
 /*
 ||||||||||||
     blog row

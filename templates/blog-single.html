@@ -48,7 +48,37 @@
     </section>
     <main class="container blog-single-container">
       <section class="blog-single">
-        <section class="blog-single-content">{{blog.text|safe}}</section>
+        <section class="blog-single-content">
+          
+          {{blog.text|safe}}
+          {% if resources  or tags%}
+            <section class="blog-footer">
+              {% if tags %}
+                <section>
+                  <h6 class="blog-footer-head">
+                    <img src="{% static 'img/tag.png' %}">
+                    تگ ها
+                  </h6>
+                    {% for tag in tags%}
+                      <a href="{{tag.slug}}"> {{tag}} </a>
+                    {% endfor %}
+                </section>
+              {% endif%}
+              {% if resources %}
+                <section>
+                  <h6 class="blog-footer-head">
+                    <img src="{% static 'img/link.png' %}">
+                    منابع
+                  </h6>
+                    {% for resource in resources %}
+                      <a href="https://www.{{resource.url}}" target="_blank"> {{resource.website}}</a>
+                    {% endfor %}
+                </section>
+              {% endif %}
+            </section>
+          {% endif %}
+          
+        </section>
         {% if related_blogs %}
         <section class="section-heading">
           <h2>بلاگ های مرتبط</h2>

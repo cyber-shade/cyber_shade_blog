@@ -93,7 +93,7 @@
         <a href="{% url 'blogs' %}">بلاگ</a>
         {% if pages %}
           {% for page in pages %}
-          <a href="{% url 'page' page.url %}">{{page.name}}</a>
+          <a href="{% url 'page' page.slug %}">{{page.name}}</a>
           {% endfor %}
         {% endif %}
       </section>

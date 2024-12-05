@@ -4,7 +4,9 @@ from .models import Blog
 
 
 class BlogAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"url": ("title",)}
+    prepopulated_fields = {"slug": ("title",)}
+    filter_horizontal = ('tags',)
+    search_fields = ('title', 'author__username')
 
 
 admin.site.register(Blog, BlogAdmin)
